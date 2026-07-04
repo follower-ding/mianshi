@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" fill="none">
+  <rect width="720" height="400" rx="16" fill="#0f172a"/>
+  <text x="360" y="36" text-anchor="middle" fill="#22d3ee" font-family="system-ui,sans-serif" font-size="18" font-weight="700">Agentic Loop 推理循环</text>
+  <rect x="280" y="60" width="160" height="44" rx="22" fill="#164e63" stroke="#22d3ee" stroke-width="2"/>
+  <text x="360" y="88" text-anchor="middle" fill="#f1f5f9" font-size="13">Load 加载上下文</text>
+  <rect x="280" y="130" width="160" height="44" rx="22" fill="#1e3a5f" stroke="#38bdf8"/>
+  <text x="360" y="158" text-anchor="middle" fill="#f1f5f9" font-size="13">Call 调用 LLM</text>
+  <rect x="280" y="200" width="160" height="44" rx="22" fill="#312e81" stroke="#818cf8"/>
+  <text x="360" y="228" text-anchor="middle" fill="#f1f5f9" font-size="13">Parse 解析 tool_call</text>
+  <rect x="280" y="270" width="160" height="44" rx="22" fill="#3f2f1f" stroke="#fbbf24"/>
+  <text x="360" y="298" text-anchor="middle" fill="#f1f5f9" font-size="13">Execute 执行工具</text>
+  <rect x="280" y="340" width="160" height="44" rx="22" fill="#14532d" stroke="#34d399"/>
+  <text x="360" y="368" text-anchor="middle" fill="#f1f5f9" font-size="13">Append 追加结果</text>
+  <path d="M360 104v26M360 174v26M360 244v26M360 314v26" stroke="#64748b" stroke-width="2"/>
+  <path d="M520 362c40-80 40-240 0-300" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
+  <text x="560" y="210" fill="#94a3b8" font-size="12">Loop</text>
+</svg>

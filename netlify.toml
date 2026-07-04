@@ -1,0 +1,13 @@
+# Monorepo: Netlify 根目录指向 frontend 子项目
+[build]
+  base = "mianshi-frontend"
+  command = "npm ci && npm run build"
+  publish = "mianshi-frontend/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

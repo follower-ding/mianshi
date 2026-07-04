@@ -1,0 +1,167 @@
+{
+  "config": {
+    "configFile": "D:\\cursor_project\\mianshi\\mianshi-frontend\\playwright.report.config.ts",
+    "rootDir": "D:/cursor_project/mianshi/mianshi-frontend/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/cursor_project/mianshi/docs/user-journey-report/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "D:/cursor_project/mianshi/mianshi-frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "user-journey-report.spec.ts"
+        ],
+        "timeout": 300000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../docs/user-journey-report/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.60.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "user-journey-report.spec.ts",
+      "file": "user-journey-report.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "完整用户旅程报告",
+          "file": "user-journey-report.spec.ts",
+          "line": 42,
+          "column": 6,
+          "specs": [
+            {
+              "title": "从注册到全功能使用",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 108318,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"wait\"\u001b[39m\n\nCall Log:\n- Timeout 90000ms exceeded while waiting on the predicate",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"wait\"\u001b[39m\n\nCall Log:\n- Timeout 90000ms exceeded while waiting on the predicate\n    at D:\\cursor_project\\mianshi\\mianshi-frontend\\e2e\\user-journey-report.spec.ts:117:14",
+                        "location": {
+                          "file": "D:\\cursor_project\\mianshi\\mianshi-frontend\\e2e\\user-journey-report.spec.ts",
+                          "column": 14,
+                          "line": 117
+                        },
+                        "snippet": "  115 |           { timeout: 90_000, intervals: [500, 1000, 2000] },\n  116 |         )\n> 117 |         .not.toBe('wait')\n      |              ^\n  118 |       if (await completeHeading.isVisible()) break\n  119 |     }\n  120 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\cursor_project\\mianshi\\mianshi-frontend\\e2e\\user-journey-report.spec.ts",
+                            "column": 14,
+                            "line": 117
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"wait\"\u001b[39m\n\nCall Log:\n- Timeout 90000ms exceeded while waiting on the predicate\n\n  115 |           { timeout: 90_000, intervals: [500, 1000, 2000] },\n  116 |         )\n> 117 |         .not.toBe('wait')\n      |              ^\n  118 |       if (await completeHeading.isVisible()) break\n  119 |     }\n  120 |\n    at D:\\cursor_project\\mianshi\\mianshi-frontend\\e2e\\user-journey-report.spec.ts:117:14"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-04T11:09:50.898Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\cursor_project\\mianshi\\docs\\user-journey-report\\test-results\\user-journey-report-完整用户旅程报告-从注册到全功能使用\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\cursor_project\\mianshi\\docs\\user-journey-report\\test-results\\user-journey-report-完整用户旅程报告-从注册到全功能使用\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\cursor_project\\mianshi\\docs\\user-journey-report\\test-results\\user-journey-report-完整用户旅程报告-从注册到全功能使用\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\cursor_project\\mianshi\\docs\\user-journey-report\\test-results\\user-journey-report-完整用户旅程报告-从注册到全功能使用\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\cursor_project\\mianshi\\mianshi-frontend\\e2e\\user-journey-report.spec.ts",
+                        "column": 14,
+                        "line": 117
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "617646254637f616c436-432cea3da443d14ba731",
+              "file": "user-journey-report.spec.ts",
+              "line": 43,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-07-04T11:09:50.365Z",
+    "duration": 109593.818,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

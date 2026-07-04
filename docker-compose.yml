@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: mianshi-postgres
+    environment:
+      POSTGRES_USER: mianshi
+      POSTGRES_PASSWORD: mianshi
+      POSTGRES_DB: mianshi
+    ports:
+      - "5432:5432"
+    volumes:
+      - mianshi_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mianshi -d mianshi"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  worker:
+    build:
+      context: ./mianshi-worker
+      dockerfile: Dockerfile
+    container_name: mianshi-worker
+    environment:
+      DATABASE_URL: postgresql://mianshi:mianshi@postgres:5432/mianshi
+      MIANSHI_API_URL: http://host.docker.internal:8788
+      WORKER_INTERNAL_KEY: change-me-worker-key
+      BOSS_PROFILE_ROOT: /app/storage/profiles
+      BOSS_HEADLESS: "true"
+      WORKER_MODE: http
+    volumes:
+      - boss_profiles:/app/storage/profiles
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8790:8790"
+
+volumes:
+  mianshi_pg_data:
+  boss_profiles:

@@ -1,0 +1,54 @@
+/* 简历卡片预览 — container query 按宽填满，对标模板市场 */
+
+.resume-card-preview-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #101018;
+  container-type: inline-size;
+}
+
+.resume-card-preview-paper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--resume-paper-width, 480px);
+  transform-origin: top center;
+  transform: translateX(-50%) scale(calc(100cqw / var(--resume-paper-width, 480px)));
+  background: #fff;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.38);
+  border-radius: 2px;
+  padding: 1.25rem;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #1e293b;
+}
+
+.resume-card-preview-fill {
+  position: absolute;
+  inset: 0;
+}
+
+.resume-card-preview-fill .resume-thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.resume-template-preview-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.resume-template-preview-inner .resume-thumb {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+}

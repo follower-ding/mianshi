@@ -1,0 +1,33 @@
+# Secrets & local env
+**/.env
+**/.env.local
+deploy/.env
+deploy/repo.env
+deploy/github.token
+**/deploy_key
+**/*.pem
+
+# Runtime data
+mianshi-api/data/db.json
+mianshi-api/data/*.log
+
+# Dependencies & build
+**/node_modules/
+**/dist/
+**/.venv/
+**/__pycache__/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.swp
+
+# Playwright
+mianshi-frontend/test-results/
+mianshi-frontend/playwright-report/
+
+# Boss profiles (worker)
+mianshi-worker/storage/
+
+# Playwright test artifacts (local only)
+mianshi-api/data/boss-qr-test/

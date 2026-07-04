@@ -1,0 +1,82 @@
+{
+  "jobs": [
+    {
+      "id": "job1",
+      "company": "字节跳动",
+      "title": "Java 后端开发工程师",
+      "position": "Java 后端开发",
+      "city": "北京",
+      "salary": "25-45K",
+      "experience": "1-3年",
+      "education": "本科",
+      "jd": "负责抖音/飞书后端服务开发与性能优化；熟悉 Java、Spring Boot、MySQL、Redis；有高并发系统经验优先。",
+      "tags": ["Java", "Spring", "高并发"],
+      "status": "published"
+    },
+    {
+      "id": "job2",
+      "company": "阿里巴巴",
+      "title": "高级 Java 开发",
+      "position": "Java 后端开发",
+      "city": "杭州",
+      "salary": "30-50K",
+      "experience": "3-5年",
+      "education": "本科",
+      "jd": "参与电商核心交易链路；精通 JVM 调优、分布式事务、消息队列；有大型项目架构经验。",
+      "tags": ["Java", "分布式", "中间件"],
+      "status": "published"
+    },
+    {
+      "id": "job3",
+      "company": "腾讯",
+      "title": "后端开发工程师",
+      "position": "Go 后端开发",
+      "city": "深圳",
+      "salary": "20-40K",
+      "experience": "1-3年",
+      "education": "本科",
+      "jd": "负责社交/游戏后台服务；熟悉 Go、微服务、gRPC；了解 Kubernetes 加分。",
+      "tags": ["Go", "微服务", "K8s"],
+      "status": "published"
+    },
+    {
+      "id": "job4",
+      "company": "美团",
+      "title": "前端开发工程师",
+      "position": "前端开发",
+      "city": "北京",
+      "salary": "18-35K",
+      "experience": "1-3年",
+      "education": "本科",
+      "jd": "负责商家端/用户端 Web 应用；精通 React、TypeScript；有性能优化与工程化经验。",
+      "tags": ["React", "TypeScript", "工程化"],
+      "status": "published"
+    },
+    {
+      "id": "job5",
+      "company": "智谱 AI",
+      "title": "AI 应用工程师",
+      "position": "AI 工程师",
+      "city": "北京",
+      "salary": "25-45K",
+      "experience": "1-3年",
+      "education": "硕士",
+      "jd": "负责 LLM 应用落地、RAG/Agent 编排；熟悉 Prompt 工程；有 Python/TypeScript 全栈能力。",
+      "tags": ["LLM", "RAG", "Agent"],
+      "status": "published"
+    },
+    {
+      "id": "job6",
+      "company": "华为",
+      "title": "云计算后端开发",
+      "position": "Java 后端开发",
+      "city": "深圳",
+      "salary": "22-38K",
+      "experience": "3-5年",
+      "education": "本科",
+      "jd": "参与云原生平台开发；熟悉 Java/Go、容器、网络协议；有开源贡献加分。",
+      "tags": ["云原生", "Java", "网络"],
+      "status": "published"
+    }
+  ]
+}

@@ -1,0 +1,821 @@
+[
+  {
+    "id": "g01",
+    "question": "JVM 垃圾回收机制",
+    "keyPoints": [
+      "可达性分析",
+      "标记清除",
+      "G1",
+      "ZGC"
+    ],
+    "answers": {
+      "good": {
+        "text": "JVM 通过可达性分析判断对象是否存活。常见算法有标记-清除和标记-整理。收集器我了解 Serial、Parallel、G1 和 ZGC。G1 把堆分成 Region，优先回收垃圾多的区域，适合大堆低停顿。ZGC 停顿时间更短。",
+        "min": 12,
+        "max": 16
+      },
+      "medium": {
+        "text": "GC 会回收不用的对象，有标记清除算法，G1 收集器比较常用，适合大内存。",
+        "min": 5,
+        "max": 11
+      },
+      "poor": {
+        "text": "不太清楚，好像会自动清理内存。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g02",
+    "question": "MySQL 索引原理",
+    "keyPoints": [
+      "B+Tree",
+      "聚簇索引",
+      "最左前缀",
+      "回表"
+    ],
+    "answers": {
+      "good": {
+        "text": "InnoDB 用 B+Tree 存储索引，叶子节点存数据。聚簇索引叶子存整行，二级索引存主键需要回表。联合索引遵循最左前缀原则，必须从最左列开始匹配。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "MySQL 索引是 B+Tree 结构，联合索引有最左前缀规则。",
+        "min": 5,
+        "max": 11
+      },
+      "poor": {
+        "text": "索引就是加快查询的。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g03",
+    "question": "Redis 持久化",
+    "keyPoints": [
+      "RDB",
+      "AOF",
+      "哈希槽",
+      "故障转移"
+    ],
+    "answers": {
+      "good": {
+        "text": "RDB 是快照，恢复快但可能丢数据。AOF 记录写命令，可配置 fsync 策略。Cluster 用哈希槽分片，16384 个槽，主从加选举做故障转移。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "RDB 和 AOF 两种持久化，Cluster 可以分片部署。",
+        "min": 5,
+        "max": 11
+      },
+      "poor": {
+        "text": "Redis 数据在内存里，重启就没了。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g04",
+    "question": "TCP 握手挥手",
+    "keyPoints": [
+      "三次握手",
+      "四次挥手",
+      "TIME_WAIT",
+      "2MSL"
+    ],
+    "answers": {
+      "good": {
+        "text": "三次握手：SYN、SYN+ACK、ACK，确认双方收发能力。四次挥手关闭连接。TIME_WAIT 等待 2MSL，确保 ACK 到达并清理旧报文。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "TCP 三次握手建立连接，四次挥手断开，有 TIME_WAIT 状态。",
+        "min": 9,
+        "max": 15
+      },
+      "poor": {
+        "text": "握手就是连上网。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g05",
+    "question": "Spring Boot 自动配置",
+    "keyPoints": [
+      "EnableAutoConfiguration",
+      "spring.factories",
+      "ConditionalOnClass"
+    ],
+    "answers": {
+      "good": {
+        "text": "@EnableAutoConfiguration 导入 AutoConfigurationImportSelector，读取 spring.factories 或 AutoConfiguration.imports 中的配置类，通过 @ConditionalOnClass 等条件注解决定是否生效。",
+        "min": 16,
+        "max": 20
+      },
+      "medium": {
+        "text": "Spring Boot 通过 spring.factories 加载自动配置类，有条件注解控制。",
+        "min": 2,
+        "max": 8
+      },
+      "poor": {
+        "text": "Spring Boot 会自动帮你配置 Bean。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g06",
+    "question": "React 虚拟 DOM",
+    "keyPoints": [
+      "虚拟 DOM",
+      "Diff",
+      "key",
+      "Fiber"
+    ],
+    "answers": {
+      "good": {
+        "text": "虚拟 DOM 是 JS 对象树，Diff 同层比较、类型不同替换、key 优化列表。Fiber 架构支持可中断渲染和优先级调度。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "虚拟 DOM 减少直接操作 DOM，Diff 算法比较变化，列表要用 key。",
+        "min": 9,
+        "max": 15
+      },
+      "poor": {
+        "text": "React 比较快因为用了虚拟 DOM。",
+        "min": 3,
+        "max": 5
+      }
+    }
+  },
+  {
+    "id": "g07",
+    "question": "HashMap 原理",
+    "keyPoints": [
+      "数组",
+      "链表",
+      "红黑树",
+      "hash",
+      "扩容"
+    ],
+    "answers": {
+      "good": {
+        "text": "HashMap 底层数组加链表，JDK8 链表超 8 转红黑树。put 算 hash 定位桶，冲突链地址法。扩容 2 倍 rehash。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "HashMap 是数组加链表，hash 冲突用链表。",
+        "min": 7,
+        "max": 13
+      },
+      "poor": {
+        "text": "HashMap 存键值对。",
+        "min": 2,
+        "max": 4
+      }
+    }
+  },
+  {
+    "id": "g08",
+    "question": "Spring IOC AOP",
+    "keyPoints": [
+      "IOC",
+      "Bean",
+      "AOP",
+      "动态代理"
+    ],
+    "answers": {
+      "good": {
+        "text": "IOC 容器管理 Bean 生命周期，通过反射创建注入。AOP 基于动态代理，在方法前后织入切面，用于日志、事务等。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "IOC 管理对象，AOP 做切面增强。",
+        "min": 5,
+        "max": 11
+      },
+      "poor": {
+        "text": "Spring 有两个核心功能。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g09",
+    "question": "秒杀系统设计",
+    "keyPoints": [
+      "限流",
+      "Redis",
+      "MQ",
+      "超卖",
+      "缓存"
+    ],
+    "answers": {
+      "good": {
+        "text": "前端限流验证码，Redis 预减库存，MQ 异步下单，数据库乐观锁防超卖，CDN 和本地缓存扛热点。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "用 Redis 缓存库存，消息队列异步处理订单。",
+        "min": 3,
+        "max": 9
+      },
+      "poor": {
+        "text": "加服务器就行了。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g10",
+    "question": "Go goroutine",
+    "keyPoints": [
+      "goroutine",
+      "线程",
+      "调度",
+      "M:N"
+    ],
+    "answers": {
+      "good": {
+        "text": "Goroutine 是用户态轻量线程，栈约 2KB，Go runtime M:N 调度到 OS 线程，切换成本低。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "Goroutine 比线程轻量，Go 自己调度。",
+        "min": 9,
+        "max": 15
+      },
+      "poor": {
+        "text": "Go 的并发方式。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g11",
+    "question": "Python GIL",
+    "keyPoints": [
+      "GIL",
+      "字节码",
+      "多线程",
+      "I/O"
+    ],
+    "answers": {
+      "good": {
+        "text": "GIL 是全局解释器锁，同一时刻一个线程执行字节码，CPU 密集型多线程受限，I/O 密集型影响较小，可用多进程绕过。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "GIL 限制多线程并行，I/O 场景还好。",
+        "min": 9,
+        "max": 15
+      },
+      "poor": {
+        "text": "Python 多线程慢因为 GIL。",
+        "min": 7,
+        "max": 9
+      }
+    }
+  },
+  {
+    "id": "g12",
+    "question": "浏览器渲染",
+    "keyPoints": [
+      "DNS",
+      "TCP",
+      "DOM",
+      "CSSOM",
+      "布局",
+      "绘制"
+    ],
+    "answers": {
+      "good": {
+        "text": "DNS 解析、TCP 连接、HTTP 请求、解析 HTML 建 DOM、CSS 建 CSSOM、合成渲染树、布局、绘制、合成层。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "下载 HTML CSS JS，构建 DOM 树然后渲染页面。",
+        "min": 0,
+        "max": 6
+      },
+      "poor": {
+        "text": "浏览器加载网页显示出来。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g13",
+    "question": "数据库事务隔离",
+    "keyPoints": [
+      "ACID",
+      "脏读",
+      "不可重复读",
+      "幻读",
+      "MVCC"
+    ],
+    "answers": {
+      "good": {
+        "text": "ACID 原子性一致性隔离性持久性。隔离级别读未提交、读已提交、可重复读、串行化。InnoDB 用 MVCC 和间隙锁解决幻读。",
+        "min": 9,
+        "max": 13
+      },
+      "medium": {
+        "text": "事务有四种隔离级别，MySQL 默认可重复读。",
+        "min": 0,
+        "max": 3
+      },
+      "poor": {
+        "text": "事务保证数据正确。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g14",
+    "question": "HTTP HTTPS",
+    "keyPoints": [
+      "TLS",
+      "对称加密",
+      "非对称加密",
+      "证书"
+    ],
+    "answers": {
+      "good": {
+        "text": "HTTPS 在 HTTP 上加 TLS，握手用非对称加密交换对称密钥，证书由 CA 签发验证身份，之后对称加密传输。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "HTTPS 加密传输，用 SSL/TLS 和证书。",
+        "min": 5,
+        "max": 11
+      },
+      "poor": {
+        "text": "HTTPS 比 HTTP 安全。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g15",
+    "question": "分布式锁",
+    "keyPoints": [
+      "Redis",
+      "Redisson",
+      "过期",
+      "续期",
+      "Redlock"
+    ],
+    "answers": {
+      "good": {
+        "text": "Redis SET NX EX 实现，Redisson 看门狗续期。需考虑锁超时、主从切换丢锁，Redlock 多节点方案有争议。",
+        "min": 12,
+        "max": 16
+      },
+      "medium": {
+        "text": "Redis SETNX 做分布式锁，要设过期时间。",
+        "min": 3,
+        "max": 9
+      },
+      "poor": {
+        "text": "用 Redis 加锁。",
+        "min": 2,
+        "max": 4
+      }
+    }
+  },
+  {
+    "id": "g16",
+    "question": "消息队列",
+    "keyPoints": [
+      "解耦",
+      "异步",
+      "削峰",
+      "可靠性",
+      "顺序"
+    ],
+    "answers": {
+      "good": {
+        "text": "MQ 解耦生产消费、异步提速、削峰填谷。需保证可靠性：持久化、ACK、重试、死信队列。顺序消息用分区键。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "消息队列做异步和解耦，Kafka RabbitMQ 常用。",
+        "min": 3,
+        "max": 9
+      },
+      "poor": {
+        "text": "用来发消息的。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g17",
+    "question": "CSS 盒模型",
+    "keyPoints": [
+      "content-box",
+      "border-box",
+      "margin",
+      "padding"
+    ],
+    "answers": {
+      "good": {
+        "text": "标准盒模型 width 不含 padding border，IE box-sizing border-box 含 padding border。margin 折叠发生在垂直相邻块级元素。",
+        "min": 11,
+        "max": 15
+      },
+      "medium": {
+        "text": "盒模型有 content padding border margin，box-sizing 控制宽度计算。",
+        "min": 6,
+        "max": 12
+      },
+      "poor": {
+        "text": "元素占一块区域。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g18",
+    "question": "微服务治理",
+    "keyPoints": [
+      "注册发现",
+      "网关",
+      "熔断",
+      "限流",
+      "链路追踪"
+    ],
+    "answers": {
+      "good": {
+        "text": "Nacos 注册发现，Gateway 路由，Sentinel/Hystrix 熔断限流，SkyWalking 链路追踪，配置中心统一配置。",
+        "min": 12,
+        "max": 16
+      },
+      "medium": {
+        "text": "微服务需要注册中心、网关和熔断机制。",
+        "min": 3,
+        "max": 9
+      },
+      "poor": {
+        "text": "把单体拆成多个服务。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g19",
+    "question": "索引优化",
+    "keyPoints": [
+      "慢查询",
+      "执行计划",
+      "覆盖索引",
+      "索引下推"
+    ],
+    "answers": {
+      "good": {
+        "text": "慢查询日志定位，EXPLAIN 看执行计划。覆盖索引避免回表，索引下推减少回表行数，避免函数和隐式转换导致失效。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "用 EXPLAIN 分析，合理建索引，避免全表扫描。",
+        "min": 0,
+        "max": 3
+      },
+      "poor": {
+        "text": "给查询字段加索引。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g20",
+    "question": "React Hooks",
+    "keyPoints": [
+      "useState",
+      "useEffect",
+      "闭包",
+      "依赖数组"
+    ],
+    "answers": {
+      "good": {
+        "text": "Hooks 让函数组件用状态和生命周期。useState 存状态，useEffect 处理副作用，需注意闭包陷阱和依赖数组完整性。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "useState 管理状态，useEffect 做副作用，要填依赖。",
+        "min": 5,
+        "max": 11
+      },
+      "poor": {
+        "text": "Hooks 是 React 16.8 的新特性。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g21",
+    "question": "JVM 内存结构",
+    "keyPoints": [
+      "堆",
+      "栈",
+      "方法区",
+      "程序计数器",
+      "OOM"
+    ],
+    "answers": {
+      "good": {
+        "text": "堆存对象实例，栈存局部变量和方法调用，方法区存类元数据，程序计数器记录字节码行号。OOM 常见于堆溢出和 Metaspace。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "JVM 有堆、栈、方法区，对象在堆上分配。",
+        "min": 7,
+        "max": 13
+      },
+      "poor": {
+        "text": "JVM 管理内存。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g22",
+    "question": "缓存一致性",
+    "keyPoints": [
+      "Cache Aside",
+      "双写",
+      "延迟双删",
+      "Canal"
+    ],
+    "answers": {
+      "good": {
+        "text": "Cache Aside 先更库再删缓存。双写不一致可用延迟双删或订阅 binlog 异步删缓存。热点 key 用互斥锁重建。",
+        "min": 11,
+        "max": 15
+      },
+      "medium": {
+        "text": "更新数据库后删除缓存，可能有短暂不一致。",
+        "min": 0,
+        "max": 3
+      },
+      "poor": {
+        "text": "缓存和数据库要保持一致。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g23",
+    "question": "Docker 容器",
+    "keyPoints": [
+      "镜像",
+      "容器",
+      "namespace",
+      "cgroup"
+    ],
+    "answers": {
+      "good": {
+        "text": "镜像是只读层，容器是运行实例。Linux namespace 隔离进程网络，cgroup 限制资源。Dockerfile 构建镜像，Compose/K8s 编排。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "Docker 用镜像启动容器，隔离应用环境。",
+        "min": 5,
+        "max": 11
+      },
+      "poor": {
+        "text": "Docker 打包部署应用。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g24",
+    "question": "算法 LRU",
+    "keyPoints": [
+      "哈希表",
+      "双向链表",
+      "O(1)",
+      "淘汰"
+    ],
+    "answers": {
+      "good": {
+        "text": "哈希表加双向链表，get/put O(1)。访问时移到队头，超容量删队尾。LinkedHashMap 或手写实现。",
+        "min": 11,
+        "max": 15
+      },
+      "medium": {
+        "text": "LRU 最近最少使用，链表加哈希实现。",
+        "min": 0,
+        "max": 3
+      },
+      "poor": {
+        "text": "缓存满了删旧的。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g25",
+    "question": "OAuth JWT",
+    "keyPoints": [
+      "JWT",
+      "payload",
+      "签名",
+      "刷新令牌"
+    ],
+    "answers": {
+      "good": {
+        "text": "JWT 三段 header payload signature，无状态认证。Access Token 短期，Refresh Token 长期轮换。注意密钥保管和 XSS 防护。",
+        "min": 7,
+        "max": 11
+      },
+      "medium": {
+        "text": "JWT 是无状态 token，包含用户信息和签名。",
+        "min": 5,
+        "max": 11
+      },
+      "poor": {
+        "text": "JWT 用来做登录。",
+        "min": 3,
+        "max": 5
+      }
+    }
+  },
+  {
+    "id": "g26",
+    "question": "Webpack Vite",
+    "keyPoints": [
+      "打包",
+      "HMR",
+      "ESM",
+      "预构建"
+    ],
+    "answers": {
+      "good": {
+        "text": "Webpack 打包模块依赖图。Vite 开发用 ESM 原生加载，esbuild 预构建依赖，生产 Rollup 打包，HMR 更快。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "Vite 开发服务器快，Webpack 配置灵活。",
+        "min": 0,
+        "max": 3
+      },
+      "poor": {
+        "text": "都是前端构建工具。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g27",
+    "question": "设计模式单例",
+    "keyPoints": [
+      "饿汉",
+      "懒汉",
+      "双重检查",
+      "volatile"
+    ],
+    "answers": {
+      "good": {
+        "text": "饿汉式类加载初始化，懒汉双重检查加 volatile 防指令重排，枚举单例防反射。Spring Bean 默认单例。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "单例保证一个实例，双重检查锁常用。",
+        "min": 1,
+        "max": 7
+      },
+      "poor": {
+        "text": "单例只有一个对象。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g28",
+    "question": "ES6 Promise",
+    "keyPoints": [
+      "Promise",
+      "then",
+      "async",
+      "await",
+      "微任务"
+    ],
+    "answers": {
+      "good": {
+        "text": "Promise 三态 pending fulfilled rejected，then 链式调用。async/await 语法糖，微任务队列优先于宏任务。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "Promise 处理异步，async await 更好写。",
+        "min": 7,
+        "max": 13
+      },
+      "poor": {
+        "text": "Promise 比回调好。",
+        "min": 2,
+        "max": 4
+      }
+    }
+  },
+  {
+    "id": "g29",
+    "question": "负载均衡",
+    "keyPoints": [
+      "轮询",
+      "加权",
+      "一致性哈希",
+      "健康检查"
+    ],
+    "answers": {
+      "good": {
+        "text": "策略有轮询、加权轮询、最少连接、一致性哈希。Nginx LVS 实现，需健康检查剔除故障节点，会话保持用 sticky 或哈希。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "负载均衡分发请求，有轮询和哈希等算法。",
+        "min": 1,
+        "max": 7
+      },
+      "poor": {
+        "text": "把请求分到多台机器。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  },
+  {
+    "id": "g30",
+    "question": "TypeScript 类型",
+    "keyPoints": [
+      "interface",
+      "泛型",
+      "联合类型",
+      "类型推断"
+    ],
+    "answers": {
+      "good": {
+        "text": "interface 描述对象结构，泛型复用类型，联合类型 | 交集 &。编译器类型推断减少标注，strict 模式更严格。",
+        "min": 15,
+        "max": 19
+      },
+      "medium": {
+        "text": "TypeScript 加类型，interface 和泛型常用。",
+        "min": 5,
+        "max": 11
+      },
+      "poor": {
+        "text": "TypeScript 是带类型的 JavaScript。",
+        "min": 0,
+        "max": 1
+      }
+    }
+  }
+]

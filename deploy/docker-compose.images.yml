@@ -1,0 +1,8 @@
+# Override for CD: pull pre-built GHCR images instead of local build
+services:
+  api:
+    build: !reset null
+    image: ${GHCR_API_IMAGE:?set GHCR_API_IMAGE}
+  web:
+    build: !reset null
+    image: ${GHCR_WEB_IMAGE:?set GHCR_WEB_IMAGE}

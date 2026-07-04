@@ -1,0 +1,22 @@
+{
+  "urls": [
+    {
+      "url": "https://login.zhipin.com/?ka=header-login",
+      "status": 200,
+      "finalUrl": "https://login.zhipin.com/?ka=header-login",
+      "title": "【BOSS直聘注册登录】boss直聘在线注册登录-BOSS直聘",
+      "canvasCount": 0,
+      "imgCount": 0,
+      "screenshot": "D:\\cursor_project\\mianshi\\mianshi-api\\data\\boss-qr-test\\page-0.png"
+    },
+    {
+      "url": "https://www.zhipin.com/web/user/?ka=header-login",
+      "status": 200,
+      "finalUrl": "https://www.zhipin.com/web/user/?ka=header-login",
+      "title": "【BOSS直聘注册登录】boss直聘在线注册登录-BOSS直聘",
+      "canvasCount": 0,
+      "imgCount": 0,
+      "screenshot": "D:\\cursor_project\\mianshi\\mianshi-api\\data\\boss-qr-test\\page-1.png"
+    }
+  ]
+}

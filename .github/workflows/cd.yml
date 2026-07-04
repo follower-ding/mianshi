@@ -1,0 +1,181 @@
+name: CD
+
+
+
+on:
+
+  push:
+
+    branches: [main, master]
+
+  workflow_dispatch:
+
+
+
+permissions:
+
+  contents: read
+
+  packages: write
+
+
+
+jobs:
+
+  validate-secrets:
+
+    runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+    outputs:
+
+      deploy_ready: ${{ steps.check.outputs.deploy_ready }}
+
+    steps:
+
+      - name: Check deploy secrets
+
+        id: check
+
+        env:
+
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+
+          GHCR_READ_TOKEN: ${{ secrets.GHCR_READ_TOKEN }}
+
+        run: |
+
+          missing=()
+
+          for name in DEPLOY_HOST DEPLOY_USER DEPLOY_SSH_KEY DEPLOY_PATH GHCR_READ_TOKEN; do
+
+            val="${!name}"
+
+            if [ -z "$val" ]; then missing+=("$name"); fi
+
+          done
+
+          if [ ${#missing[@]} -gt 0 ]; then
+
+            echo "deploy_ready=false" >> "$GITHUB_OUTPUT"
+
+            echo "::warning::CD deploy skipped — missing GitHub Secrets: ${missing[*]}"
+
+            echo "Configure secrets: deploy/GITHUB-SECRETS.md"
+
+          else
+
+            echo "deploy_ready=true" >> "$GITHUB_OUTPUT"
+
+            echo "All deploy secrets present."
+
+          fi
+
+
+
+  publish:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+
+        with:
+
+          registry: ghcr.io
+
+          username: ${{ github.actor }}
+
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & push API
+
+        uses: docker/build-push-action@v6
+
+        with:
+
+          context: .
+
+          file: deploy/Dockerfile.api
+
+          push: true
+
+          tags: |
+
+            ghcr.io/${{ github.repository_owner }}/mianshi-api:${{ github.sha }}
+
+            ghcr.io/${{ github.repository_owner }}/mianshi-api:latest
+
+      - name: Build & push Web
+
+        uses: docker/build-push-action@v6
+
+        with:
+
+          context: .
+
+          file: deploy/Dockerfile.frontend
+
+          push: true
+
+          tags: |
+
+            ghcr.io/${{ github.repository_owner }}/mianshi-web:${{ github.sha }}
+
+            ghcr.io/${{ github.repository_owner }}/mianshi-web:latest
+
+
+
+  deploy:
+
+    needs: [publish, validate-secrets]
+
+    runs-on: ubuntu-latest
+
+    if: |
+
+      (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') &&
+
+      needs.validate-secrets.outputs.deploy_ready == 'true'
+
+    steps:
+
+      - name: Deploy via SSH
+
+        uses: appleboy/ssh-action@v1
+
+        with:
+
+          host: ${{ secrets.DEPLOY_HOST }}
+
+          username: ${{ secrets.DEPLOY_USER }}
+
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+          script: |
+
+            set -e
+
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            export GHCR_API_IMAGE=ghcr.io/${{ github.repository_owner }}/mianshi-api:${{ github.sha }}
+
+            export GHCR_WEB_IMAGE=ghcr.io/${{ github.repository_owner }}/mianshi-web:${{ github.sha }}
+
+            echo "${{ secrets.GHCR_READ_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            ./update.sh --images --skip-pull
+
+            curl -sf "http://127.0.0.1:${API_PORT:-8788}/api/health" && echo " deploy health ok"
+
+

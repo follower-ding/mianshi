@@ -1,0 +1,44 @@
+{
+  "name": "mianshi-api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "quality:regression": "tsx scripts/quality-regression.ts",
+    "test:resume-demo": "tsx scripts/resume-demo-regression.ts",
+    "test:import-extract": "tsx scripts/resume-import-extract.ts",
+    "test:resume-share": "tsx scripts/resume-share-regression.ts",
+    "test:resume-file-guard": "tsx scripts/resume-file-guard.test.ts",
+    "test:smart-import-batch": "tsx scripts/smart-import-batch.test.ts",
+    "test:quiz-score": "tsx scripts/quiz-score.test.ts",
+    "test:resume-field-coverage": "tsx scripts/resume-field-coverage.test.ts",
+    "migrate:json-resumes": "tsx scripts/migrate-json-resumes-to-pg.ts",
+    "verify:pg-resumes": "tsx scripts/verify-pg-resumes.ts",
+    "test:resume-all": "npm run test:resume-demo && npm run test:import-extract && npm run test:resume-share && npm run test:resume-file-guard",
+    "seed:quality-questions": "tsx scripts/seed-quality-questions.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.4",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
+    "hono": "^4.8.5",
+    "jose": "^6.2.3",
+    "mammoth": "^1.12.0",
+    "openai": "^4.104.0",
+    "pdf-parse": "^2.4.5",
+    "pdfjs-dist": "^6.1.200",
+    "playwright": "^1.52.0",
+    "postgres": "^3.4.9",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.15.32",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}

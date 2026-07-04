@@ -1,0 +1,41 @@
+2026-06-13 05:57:18,345 [ERROR] login_helper: 登录失败
+Traceback (most recent call last):
+  File "D:\cursor_project\mianshi\mianshi-worker\scripts\login_helper.py", line 173, in run_qr_login
+    page = ChromiumPage(co)
+  File "D:\cursor_project\mianshi\mianshi-worker\.venv\Lib\site-packages\DrissionPage\_pages\chromium_page.py", line 23, in __new__
+    browser = Chromium(addr_or_opts=addr_or_opts)
+  File "D:\cursor_project\mianshi\mianshi-worker\.venv\Lib\site-packages\DrissionPage\_base\chromium.py", line 41, in __new__
+    is_headless, browser_id, is_exists, ws_only = run_browser(opt)
+                                                  ~~~~~~~~~~~^^^^^
+  File "D:\cursor_project\mianshi\mianshi-worker\.venv\Lib\site-packages\DrissionPage\_base\chromium.py", line 501, in run_browser
+    is_exists = connect_browser(chromium_options)
+  File "D:\cursor_project\mianshi\mianshi-worker\.venv\Lib\site-packages\DrissionPage\_functions\browser.py", line 30, in connect_browser
+    ip, port = address.split(':')
+    ^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2026-06-13 05:59:20,001 [ERROR] login_helper: 登录失败
+Traceback (most recent call last):
+  File "D:\cursor_project\mianshi\mianshi-worker\scripts\login_helper.py", line 173, in run_qr_login
+    page = ChromiumPage(co)
+  File "D:\cursor_project\mianshi\mianshi-worker\.venv\Lib\site-packages\DrissionPage\_pages\chromium_page.py", line 23, in __new__
+    browser = Chromium(addr_or_opts=addr_or_opts)
+  File "D:\cursor_project\mianshi\mianshi-worker\.venv\Lib\site-packages\DrissionPage\_base\chromium.py", line 41, in __new__
+    is_headless, browser_id, is_exists, ws_only = run_browser(opt)
+                                                  ~~~~~~~~~~~^^^^^
+  File "D:\cursor_project\mianshi\mianshi-worker\.venv\Lib\site-packages\DrissionPage\_base\chromium.py", line 501, in run_browser
+    is_exists = connect_browser(chromium_options)
+  File "D:\cursor_project\mianshi\mianshi-worker\.venv\Lib\site-packages\DrissionPage\_functions\browser.py", line 30, in connect_browser
+    ip, port = address.split(':')
+    ^^^^^^^^
+ValueError: not enough values to unpack (expected 2, got 1)
+2026-06-13 06:00:27,333 [INFO] login_helper: 已打开 Boss 登录页: https://www.zhipin.com/web/user/?ka=header-login
+2026-06-13 06:02:37,826 [INFO] login_helper: 已打开 Boss 登录页: https://www.zhipin.com/web/user/?ka=header-login
+2026-06-13 06:03:07,414 [INFO] login_helper: 登录成功: 丁鸿遥 (uid=522407222, cookies=13)
+2026-06-13 06:05:38,655 [ERROR] login_helper: 扫码登录超时（300 秒）
+2026-06-13 06:36:08,567 [INFO] login_helper: 本地 Cookie 有效，跳过浏览器登录
+2026-06-13 06:54:32,313 [INFO] login_helper: 本地 Cookie 有效，跳过浏览器登录
+2026-06-13 07:15:45,496 [INFO] login_helper: 本地 Cookie 有效，跳过浏览器登录
+2026-06-13 16:40:19,163 [INFO] login_helper: 本地 Cookie 有效，跳过浏览器登录
+2026-06-13 17:47:44,794 [INFO] login_helper: 已打开 Boss 登录页: https://www.zhipin.com/web/user/?ka=header-login
+2026-06-13 17:48:34,466 [INFO] login_helper: 登录成功: 丁鸿遥 (uid=522407222, cookies=16)
+2026-06-21 23:40:26,743 [INFO] login_helper: 本地 Cookie 有效，跳过浏览器登录
