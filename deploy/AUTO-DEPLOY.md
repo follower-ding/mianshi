@@ -5,7 +5,8 @@
 1. GitHub 仓库 + Secrets（**详见 [GITHUB-SECRETS.md](./GITHUB-SECRETS.md)**）：
    - `DEPLOY_HOST` / `DEPLOY_USER` / `DEPLOY_SSH_KEY` / `DEPLOY_PATH`
    - `GHCR_READ_TOKEN`（服务器拉镜像）
-2. 本地验证：`.\scripts\verify-github-secrets.ps1`（需 `gh auth login`）
+# 一键启用 CD
+.\scripts\setup-github-cd.ps1
 3. 服务器：`deploy/.env`（从 `.env.example` 复制）
 4. 本地：`deploy/repo.env`（从 `repo.env.example` 复制）
 
