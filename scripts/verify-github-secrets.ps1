@@ -6,6 +6,7 @@ Set-Location $root
 $required = @(
   'DEPLOY_HOST',
   'DEPLOY_USER',
+  'DEPLOY_SSH_PORT',
   'DEPLOY_SSH_KEY',
   'DEPLOY_PATH',
   'GHCR_READ_TOKEN'
