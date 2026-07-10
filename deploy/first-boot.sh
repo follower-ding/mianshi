@@ -26,32 +26,73 @@ fi
 sudo mkdir -p "$(dirname "$DIR")"
 sudo chown "$USER:$USER" "$(dirname "$DIR")" 2>/dev/null || true
 
-clone_repo() {
-  if [ -d "$DIR/.git" ]; then
-    git -C "$DIR" pull --ff-only && return 0
-  fi
-  rm -rf "$DIR"
+# 清理旧目录（可能由 root/其他用户创建，需 sudo）
+if [ -e "$DIR" ]; then
+  echo "==> 清理旧目录 $DIR ..."
+  sudo rm -rf "$DIR"
+fi
+sudo mkdir -p "$DIR"
+sudo chown "$USER:$USER" "$DIR"
 
-  echo "==> git clone (shallow)..."
-  if git clone --depth 1 "$REPO" "$DIR" 2>/dev/null; then return 0; fi
-
-  echo "==> GitHub 直连失败，尝试镜像 clone..."
-  if git clone --depth 1 "https://gitclone.com/github.com/follower-ding/mianshi.git" "$DIR" 2>/dev/null; then return 0; fi
-
-  echo "==> 尝试下载 tarball..."
-  TMP=$(mktemp -d)
-  if curl -fsSL --connect-timeout 60 "https://ghproxy.net/${REPO}/archive/refs/heads/main.tar.gz" -o "$TMP/mianshi.tar.gz"; then
-    tar -xzf "$TMP/mianshi.tar.gz" -C "$TMP"
-    mv "$TMP/mianshi-main" "$DIR"
-    rm -rf "$TMP"
+verify_repo() {
+  if [ -f "$DIR/deploy/docker-compose.prod.yml" ]; then
     return 0
   fi
-  rm -rf "$TMP"
-  echo "ERROR: 无法从 GitHub 拉取代码，请检查服务器网络或手动 scp 上传" >&2
+  echo "ERROR: 代码不完整，缺少 deploy/docker-compose.prod.yml" >&2
+  ls -la "$DIR" 2>/dev/null || true
+  return 1
+}
+
+download_tarball() {
+  local url="$1"
+  local tmp
+  tmp=$(mktemp -d)
+  echo "    → $url"
+  if curl -fsSL --connect-timeout 30 --max-time 300 "$url" -o "$tmp/mianshi.tar.gz"; then
+    tar -xzf "$tmp/mianshi.tar.gz" -C "$tmp"
+    sudo rm -rf "$DIR"
+    sudo mv "$tmp"/mianshi-main "$DIR"
+    sudo chown -R "$USER:$USER" "$DIR"
+    rm -rf "$tmp"
+    return 0
+  fi
+  rm -rf "$tmp"
+  return 1
+}
+
+clone_repo() {
+  if [ -d "$DIR/.git" ] && verify_repo; then
+    echo "==> 已有代码，git pull..."
+    git -C "$DIR" pull --ff-only && return 0
+  fi
+  sudo rm -rf "$DIR"
+  sudo mkdir -p "$DIR"
+  sudo chown "$USER:$USER" "$DIR"
+
+  echo "==> git clone (shallow)..."
+  if git clone --depth 1 "$REPO" "$DIR" 2>/dev/null && verify_repo; then return 0; fi
+  sudo rm -rf "$DIR"
+  sudo mkdir -p "$DIR" && sudo chown "$USER:$USER" "$DIR"
+
+  echo "==> GitHub 直连失败，尝试 gitclone 镜像..."
+  if git clone --depth 1 "https://gitclone.com/github.com/follower-ding/mianshi.git" "$DIR" 2>/dev/null && verify_repo; then return 0; fi
+  sudo rm -rf "$DIR"
+  sudo mkdir -p "$DIR" && sudo chown "$USER:$USER" "$DIR"
+
+  echo "==> 尝试下载 tarball（多镜像）..."
+  download_tarball "https://ghproxy.net/https://github.com/follower-ding/mianshi/archive/refs/heads/main.tar.gz" && verify_repo && return 0
+  sudo rm -rf "$DIR"
+  download_tarball "https://mirror.ghproxy.com/https://github.com/follower-ding/mianshi/archive/refs/heads/main.tar.gz" && verify_repo && return 0
+  sudo rm -rf "$DIR"
+  download_tarball "https://ghfast.top/https://github.com/follower-ding/mianshi/archive/refs/heads/main.tar.gz" && verify_repo && return 0
+
+  sudo rm -rf "$DIR"
+  echo "ERROR: 无法从 GitHub 拉取代码。请用下方「整段粘贴」命令，或从本机 scp 上传。" >&2
   exit 1
 }
 
 clone_repo
+mkdir -p "$DIR/deploy"
 
 if [ ! -f "$DIR/deploy/.env" ]; then
   JWT_SECRET=$(openssl rand -base64 48 | tr -d '\n')
