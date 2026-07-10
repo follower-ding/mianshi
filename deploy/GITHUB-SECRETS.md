@@ -9,19 +9,25 @@ GitHub 仓库 → **Settings** → **Secrets and variables** → **Actions** →
 或使用 CLI（需 `gh auth login`）：
 
 ```powershell
-gh secret set DEPLOY_HOST --body "203.0.113.10"
+# 推荐：一键配置（生成密钥 + 写入 Secrets）
+.\scripts\setup-github-cd.ps1
+
+# 或手动
+gh secret set DEPLOY_HOST --body "49.235.172.214"
 gh secret set DEPLOY_USER --body "ubuntu"
+gh secret set DEPLOY_SSH_PORT --body "2222"
 gh secret set DEPLOY_PATH --body "/opt/mianshi/deploy"
-gh secret set DEPLOY_SSH_KEY < C:\Users\you\.ssh\mianshi_deploy
-gh secret set GHCR_READ_TOKEN --body "ghp_xxxxxxxx"
+gh secret set DEPLOY_SSH_KEY < C:\Users\you\.ssh\mianshi_github_cd
+gh secret set GHCR_READ_TOKEN --body "$(gh auth token)"
 ```
 
 ## 必需 Secrets
 
 | Secret | 说明 | 示例 |
 |--------|------|------|
-| `DEPLOY_HOST` | 服务器 IP 或域名 | `203.0.113.10` |
+| `DEPLOY_HOST` | 服务器 IP 或域名 | `49.235.172.214` |
 | `DEPLOY_USER` | SSH 用户名 | `ubuntu` |
+| `DEPLOY_SSH_PORT` | SSH 端口 | `2222`（本机 22 关闭时用 2222） |
 | `DEPLOY_SSH_KEY` | 部署用私钥全文（OpenSSH 格式） | `-----BEGIN OPENSSH PRIVATE KEY-----...` |
 | `DEPLOY_PATH` | 服务器上 deploy 目录绝对路径 | `/opt/mianshi/deploy` |
 | `GHCR_READ_TOKEN` | 服务器拉 GHCR 镜像的 PAT | `ghp_...` 或 Fine-grained token |
@@ -72,13 +78,13 @@ cp deploy/.env.example deploy/.env
 ## 首次服务器准备
 
 ```bash
-sudo mkdir -p /opt/mianshi
-sudo chown $USER:$USER /opt/mianshi
-git clone https://github.com/YOUR_USER/mianshi.git /opt/mianshi
+# 1. 本机运行 setup-github-cd.ps1 后，把打印的公钥加入服务器：
+grep -qF 'github-actions-mianshi' ~/.ssh/authorized_keys || echo 'ssh-ed25519 AAAA... github-actions-mianshi' >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+
+# 2. 确保项目已 clone 且 .env 已配置（WEB_PORT=8090）
 cd /opt/mianshi/deploy
-cp .env.example .env   # 编辑
-docker compose -f docker-compose.prod.yml up -d --build
-curl -sf http://127.0.0.1:8788/api/health
+docker compose -f docker-compose.prod.yml ps
 ```
 
-之后每次 `git push origin main` 将自动更新镜像并 SSH 执行 `./update.sh --images --skip-pull`。
+之后每次 **`git push origin main`** → Actions 自动构建 GHCR 镜像 → SSH 执行 `update.sh --images`。
