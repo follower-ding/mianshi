@@ -90,6 +90,6 @@ jobs:
             export GHCR_API_IMAGE=ghcr.io/${{ github.repository_owner }}/mianshi-api:${{ github.sha }}
             export GHCR_WEB_IMAGE=ghcr.io/${{ github.repository_owner }}/mianshi-web:${{ github.sha }}
             echo "${{ secrets.GHCR_READ_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            ./update.sh --images
+            bash update.sh --images
             curl -sf "http://127.0.0.1:${API_PORT:-8789}/api/health" && echo " deploy health ok"
             curl -sf -o /dev/null -w "Web HTTP %{http_code}\n" "http://127.0.0.1:${WEB_PORT:-8090}/"
