@@ -18,20 +18,31 @@ for arg in "$@"; do
   esac
 done
 
+# 非 root 用户常无 docker.sock 权限，自动加 sudo
+DOCKER=(docker)
+if ! docker info >/dev/null 2>&1; then
+  if sudo -n docker info >/dev/null 2>&1 || sudo docker info >/dev/null 2>&1; then
+    DOCKER=(sudo docker)
+  else
+    echo "ERROR: cannot access Docker daemon (try: sudo usermod -aG docker \$USER)" >&2
+    exit 1
+  fi
+fi
+
 if [ "$SKIP_PULL" = false ]; then
   git -C .. pull --ff-only
 fi
 
-COMPOSE="docker compose -f docker-compose.prod.yml"
+COMPOSE=("${DOCKER[@]}" compose -f docker-compose.prod.yml)
 if [ "$USE_IMAGES" = true ]; then
-  COMPOSE="$COMPOSE -f docker-compose.images.yml"
-  $COMPOSE pull
-  $COMPOSE up -d --no-build --remove-orphans
+  COMPOSE+=(-f docker-compose.images.yml)
+  "${COMPOSE[@]}" pull
+  "${COMPOSE[@]}" up -d --no-build --remove-orphans
 else
-  $COMPOSE up -d --build --remove-orphans
+  "${COMPOSE[@]}" up -d --build --remove-orphans
 fi
 
-$COMPOSE ps
+"${COMPOSE[@]}" ps
 
 API_PORT="${API_PORT:-8789}"
 WEB_PORT="${WEB_PORT:-8090}"

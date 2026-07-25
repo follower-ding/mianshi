@@ -47,9 +47,10 @@ jobs:
       - name: Smart import regression
         working-directory: mianshi-api
         run: npm run test:smart-import-batch
-      - name: Resume all regression
+      # resume-share 需运行中的 API，CI 只跑无 HTTP 依赖的子项
+      - name: Resume offline regression
         working-directory: mianshi-api
-        run: npm run test:resume-all
+        run: npm run test:resume-demo && npm run test:import-extract && npm run test:resume-file-guard
       - name: Build API
         working-directory: mianshi-api
         env:
